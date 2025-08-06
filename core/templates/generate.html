@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Genereeri motivatsioonikiri ja töösoovitused{% endblock %}
+{% block content %}
+
+<h2 class="mb-4 text-primary fw-bold">🧠 Genereeri AI abil motivatsioonikiri ja töösoovitused</h2>
+
+<!-- Tekstisisestus -->
+<div class="card p-4 shadow-sm bg-white border-0 mb-4">
+  <h5 class="text-secondary">✍️ Sisesta CV käsitsi:</h5>
+  <form method="post">
+    {% csrf_token %}
+    <div class="mb-3">{{ form.cv_text.label_tag }} {{ form.cv_text }}</div>
+    <button type="submit" class="btn btn-success" name="submit_text">Genereeri tekstist</button>
+  </form>
+</div>
+
+<!-- Faili üleslaadimine -->
+<div class="card p-4 shadow-sm bg-white border-0 mb-4">
+  <h5 class="text-secondary">📎 Või lae üles oma CV (.pdf / .docx):</h5>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">{{ upload_form.cv_file.label_tag }} {{ upload_form.cv_file }}</div>
+    <button type="submit" class="btn btn-primary" name="submit_file">Genereeri failist</button>
+  </form>
+</div>
+
+<!-- AI vastus -->
+{% if response %}
+  <div class="card shadow border-0 bg-light mb-4">
+    <div class="card-header text-white bg-gradient fw-semibold fs-5">
+      🤖 AI vastus
+    </div>
+    <div class="card-body">
+      <article class="ai-output-text">
+        <pre class="m-0">{{ response }}</pre>
+      </article>
+    </div>
+  </div>
+{% endif %}
+
+
+<!-- Tagasi dashboardile -->
+{% if user.is_authenticated %}
+  <div class="text-end mt-3">
+    <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary btn-sm">🔙 Vaata oma sisestusi</a>
+  </div>
+{% endif %}
+
+{% endblock %}

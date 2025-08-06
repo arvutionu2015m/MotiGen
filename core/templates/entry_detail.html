@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Sisestuse detailid{% endblock %}
+{% block content %}
+
+<h2 class="text-primary mb-3">📄 Sisestuse detailvaade</h2>
+
+<div class="card mb-4 shadow-sm border-0">
+  <div class="card-header bg-gradient text-white fw-semibold">
+    Sisestatud: {{ entry.created_at|date:"d.m.Y H:i" }}
+  </div>
+  <div class="card-body bg-light">
+
+    <h5 class="text-success">CV sisend:</h5>
+    <pre class="text-muted small">{{ entry.content }}</pre>
+
+    {% if entry.ai_response %}
+      <h5 class="text-info mt-4">AI vastus:</h5>
+      <pre class="text-dark small">{{ entry.ai_response }}</pre>
+    {% else %}
+      <p class="text-warning mt-4">AI vastus puudub selle sisestuse jaoks.</p>
+    {% endif %}
+
+    <div class="mt-4 text-end">
+      <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary btn-sm">🔙 Tagasi dashboardi</a>
+      <a href="{% url 'entry_delete' entry.id %}" class="btn btn-outline-danger btn-sm"
+         onclick="return confirm('Kas soovid kindlasti selle sisestuse kustutada?');">🗑️ Kustuta</a>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}Minu CV & AI vastused{% endblock %}
+{% block content %}
+
+<h2 class="mb-4 text-primary fw-bold">📂 Minu CV analüüsid ja AI soovitused</h2>
+
+{% if entries %}
+{% for entry in entries %}
+<div class="card mb-4 shadow-sm border-0">
+  <div class="card-header bg-gradient bg-primary text-white fw-semibold fs-5">
+    🗂️ Sisestus: {{ entry.created_at|date:"d.m.Y H:i" }}
+  </div>
+  <div class="card-body bg-light">
+
+    <div class="row g-4">
+
+      <!-- CV sisestus -->
+      <div class="col-md-6">
+        <div class="p-3 rounded border bg-white h-100">
+          <h6 class="text-success fw-semibold">📄 CV sisend</h6>
+          <pre class="small text-muted" style="white-space: pre-wrap;">{{ entry.content }}</pre>
+        </div>
+      </div>
+
+      <!-- AI vastus -->
+      <div class="col-md-6">
+        <div class="p-3 rounded border bg-white h-100">
+          <h6 class="text-info fw-semibold">🤖 AI vastus</h6>
+          {% if entry.ai_response %}
+          <pre class="small text-dark" style="white-space: pre-wrap;">{{ entry.ai_response }}</pre>
+          {% else %}
+          <div class="alert alert-warning p-2 small">⚠️ AI vastus ei ole veel genereeritud selle sisestuse jaoks.</div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="text-end mt-3">
+        <a href="{% url 'entry_detail' entry.id %}" class="btn btn-sm btn-outline-info">🔍 Vaata detailid</a>
+        <a href="{% url 'download_pdf' entry.id %}" class="btn btn-sm btn-outline-primary">⬇️ PDF</a>
+        <a href="{% url 'entry_delete' entry.id %}" class="btn btn-sm btn-outline-danger"
+          onclick="return confirm('Kas oled kindel, et soovid selle sisestuse kustutada?');">
+          🗑️ Kustuta
+        </a>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% else %}
+<div class="alert alert-warning text-center">
+  🕸️ Sul ei ole veel salvestatud CV sisestusi. <br>
+  <a href="{% url 'generate_content' %}" class="btn btn-sm btn-outline-primary mt-3">Genereeri esimene
+    motivatsioonikiri</a>
+</div>
+{% endif %}
+
+{% endblock %}

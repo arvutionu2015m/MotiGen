@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <title>AI vastus</title>
+    <style>
+        body { font-family: sans-serif; font-size: 12pt; line-height: 1.5; }
+        h1 { color: #2196f3; font-size: 18pt; }
+        h2 { color: #00796b; font-size: 14pt; margin-top: 20px; }
+        pre { background: #f5f5f5; padding: 1rem; white-space: pre-wrap; border-radius: 5px; }
+        .meta { font-size: 10pt; color: #888; margin-bottom: 1rem; }
+    </style>
+</head>
+<body>
+
+<h1>MotiGen – AI vastus</h1>
+<p class="meta">Kasutaja: {{ entry.user.username }} | Kuupäev: {{ entry.created_at|date:"d.m.Y H:i" }}</p>
+
+<h2>📄 Sisestatud CV:</h2>
+<pre>{{ entry.content }}</pre>
+
+{% if entry.ai_response %}
+    {% for section in entry.ai_response.splitlines %}
+        {% if section|slice:":2" == "##" %}
+            <h2>{{ section|slice:"3:" }}</h2>
+        {% elif section %}
+            <p>{{ section }}</p>
+        {% endif %}
+    {% endfor %}
+{% else %}
+    <p><em>AI vastus puudub.</em></p>
+{% endif %}
+
+</body>
+</html>

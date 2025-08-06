@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Avaleht{% endblock %}
+{% block content %}
+
+<div class="row g-4">
+    <!-- Vasak tulp -->
+    <div class="col-md-6">
+        <div class="p-4 rounded-3 shadow bg-light-green h-100">
+            <h2 class="text-success mb-3">🚀 Projekt käivitus</h2>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">✅ Loo konto ja logi sisse</li>
+                <li class="list-group-item">✅ Sisesta oma CV või töökogemus</li>
+                <li class="list-group-item">✅ Genereeri personaalsed motivatsioonikirjad</li>
+                <li class="list-group-item">✅ Saa soovitusi tööpakkumistele kandideerimiseks</li>
+            </ul>
+            <hr>
+            <h4 class="text-teal mt-4">🎯 Minu kampaania eesmärgid</h4>
+            <p>
+                Luua AI-põhine karjääriplatvorm, mis toetab inimesi tööturule sisenemisel ja enesearendamisel.
+            </p>
+            <h5 class="text-teal">📌 Head näited</h5>
+            <p>
+                Automatiseeritud kirjad, soovitused, sihitud tööpakkumised – kõik ühelt platvormilt.
+            </p>
+        </div>
+    </div>
+
+    <!-- Parem tulp -->
+    <div class="col-md-6">
+        <div class="p-4 rounded-3 shadow bg-light-blue h-100">
+            <h2 class="text-primary mb-3">📘 Projekti käsiraamat</h2>
+            <p>
+                MotiGen kasutab GPT-4 keelemudelit, et pakkuda kasutajale personaalseid ja kvaliteetseid CV ning motivatsioonikirjade soovitusi.
+            </p>
+            <h4 class="text-primary mt-4">🧠 Tehisintellekti kasutus</h4>
+            <p>
+                AI analüüsib CV sisendit ning pakub väljundeid, mis on kohandatud soovitud töörolli või valdkonna järgi.
+            </p>
+            <h5 class="text-primary">🔧 Tehniline info</h5>
+            <ul>
+                <li>Python 3 / Django 5</li>
+                <li>OpenAI GPT-4 integratsioon</li>
+                <li>Bootstrap 5 UI / Mobile-first disain</li>
+                <li>Modulaarne arhitektuur (forms, views, utils, signals jne)</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
